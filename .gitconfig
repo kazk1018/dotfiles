@@ -1,0 +1,26 @@
+[user]
+  name  = kazk1018
+  email = kazuki.t.1018@gmail.com
+
+[core]
+  excludesfile = ~/.gitignore
+
+[alias]
+  st = status --short --branch
+  ci = commit
+  df = diff
+  co = checkout
+  b  = branch
+  sb = submodule
+  l  = log --decorate --stat
+  lg = log --graph --decorate --oneline
+
+[credential]
+  helper = osxkeychain
+
+[color]
+  ui = true
+  diff = true
+
+[diff]
+  renames = true
