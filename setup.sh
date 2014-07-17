@@ -1,5 +1,5 @@
 #! /bin/sh
-DOT_FILES=( .zshrc .gitconfig .gitignore .vim .gitmodule ) 
+DOT_FILES=( .zshrc .gitconfig .gitignore .vim .gitmodules .tmux.conf ) 
 
 if [ ! -e $HOME/dotfiles ];
 then
