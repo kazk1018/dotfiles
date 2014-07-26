@@ -3,3 +3,6 @@
 
 # NeoBundle
 .vim/bundle
+
+# ssh
+.zsh_ssh

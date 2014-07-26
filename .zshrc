@@ -1,16 +1,35 @@
-# .zshrc
+ # .zshrc
 
 # Colors
 autoload -Uz colors
 colors
 
+export LSCOLORS=Exfxcxdxbxegedabagacad
+
+
+# git
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '(%b)'
+zstyle ':vcs_info:*' actionformats '(%b|%a)'
+precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+
+
 # Alias
 ## git
 alias g='git'
 alias gst='git status --short --branch' 
+alias sb="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias mou='open -a Mou'
+alias zshconfig="vim ~/.zshrc"
+alias vimconfig="vim ~/.vimrc"
 
 ## commands
-alias la='ls -a'
+alias ls='ls -G'
+alias la='ls -a -G'
 alias ll='ls -l -G'
 alias lla='ls -la -G'
 alias lal='ls -la -G'
@@ -21,17 +40,18 @@ alias mkdir='mkdir -p'
 alias sudo='sudo -E '
 
 
-# Left Prompt
-
-
-# Right Prompt (Git)
+# Prompt
+local p_cdir="%F{green}[%~]$f%b"$'\n'
+local p_info="[%n@%m]%# "
+PROMPT="$p_cdir$p_info"
+RPROMPT="%1(v|%F{green}%1v%f|)"
 
 
 # General Settings
 export EDITOR=vim
 export GIT_EDITOR=vim
 export LANG=ja_JP.UTF-8
-
+export DOTFILES=$HOME/dotfiles
 
 # Completion
 autoload -Uz compinit
@@ -84,14 +104,35 @@ setopt auto_param_slash
 ## ディレクトリに/を追加する
 setopt mark_dirs
 
-
 # Plugins
+
 ## zsh-completions
-if [ -e .zsh/zsh-completions ]; then
-  fpath=(.zsh/zsh-completions/src $fpath)
+if [ -e $DOTFILES/.zsh/zsh-completions ]; then
+  fpath=($DOTFILES/.zsh/zsh-completions/src $fpath)
 fi
 
 ## zsh-syntax-highlighting
-if [ -e .zsh/zsh-syntax-highlighting ]; then
-  source .zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -e $DOTFILES/.zsh/zsh-syntax-highlighting ]; then
+  source $DOTFILES/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# SSH 
+source ~/.zsh_ssh
+
+
+# App & Library
+
+# node & nvm initialization
+[[ -s /Users/Kazuki/.nvm/nvm.sh ]] && . /Users/Kazuki/.nvm/nvm.sh
+npm_dir=${NVM_PATH}_modules
+export NODE_PATH=$npm_dir
+nvm use v0.10.28
+
+# /usr/local/bin
+export PATH=/usr/local/bin:$PATH
+
+# Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+eval "$(pyenv init - zsh)"
+# export PYENV_VERSION=system 
