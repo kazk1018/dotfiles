@@ -39,6 +39,7 @@ alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias sudo='sudo -E '
 
+alias v='vagrant'
 
 # Prompt
 local p_cdir="%F{green}[%~]$f%b"$'\n'
@@ -58,7 +59,7 @@ autoload -Uz compinit
 compinit
 
 ## 補完で小文字でも大文字にマッチさせる
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## 補間時にカーソル選択できるようにする
 zstyle ':completion:*:default' menu select=1
@@ -117,13 +118,13 @@ if [ -e $DOTFILES/.zsh/zsh-syntax-highlighting ]; then
 fi
 
 # SSH 
-source ~/.zsh_ssh
+# source ~/.zsh_ssh
 
 
 # App & Library
 
 # node & nvm initialization
-[[ -s /Users/Kazuki/.nvm/nvm.sh ]] && . /Users/Kazuki/.nvm/nvm.sh
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
 nvm use v0.10.28
@@ -134,5 +135,14 @@ export PATH=/usr/local/bin:$PATH
 # Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-eval "$(pyenv init - zsh)"
-# export PYENV_VERSION=system 
+# pyenv
+if [ -e $HOME/.pyenv ]; then
+  export PATH="$PATH:$HOME/.pyenv/bin"
+  eval "$(pyenv init - zsh)"
+  export PYENV_VERSION=system 
+fi
+
+# rvm
+if [ -e $HOME/.rvm ]; then
+  export PATH="$PATH:$HOME/.rvm/bin"
+fi
