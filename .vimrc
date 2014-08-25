@@ -35,12 +35,10 @@ filetype plugin indent on
 
 NeoBundleCheck
 
-" NERDTree
-" 隠しファイルをデフォルトで表示させる
-" let NERDTreeShowHidden = 1
- 
-" デフォルトでツリーを表示させる
-" autocmd VimEnter * execute 'NERDTree'
+" NERDTree "
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Backspase
 set backspace=indent,eol,start
