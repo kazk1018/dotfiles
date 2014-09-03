@@ -72,7 +72,8 @@ let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*f
 " Backspase
 set backspace=indent,eol,start
 
-syntax on
+colorscheme monokai
+syntax enable 
 
 set title
 set number
