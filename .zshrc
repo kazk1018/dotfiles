@@ -129,6 +129,9 @@ npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
 nvm use v0.10.28
 
+# JAVA_HOME
+export JAVA_HOME=`/usr/libexec/java_home`
+
 # /usr/local/bin
 export PATH=/usr/local/bin:$PATH
 
