@@ -56,7 +56,7 @@ export DOTFILES=$HOME/dotfiles
 
 # Completion
 autoload -Uz compinit
-compinit
+compinit -C
 
 ## 補完で小文字でも大文字にマッチさせる
 # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -127,10 +127,11 @@ fi
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
-nvm use v0.10.28
+nvm use v0.10.33
 
 # JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 # /usr/local/bin
 export PATH=/usr/local/bin:$PATH
@@ -142,10 +143,13 @@ export PATH="/usr/local/heroku/bin:$PATH"
 if [ -e $HOME/.pyenv ]; then
   export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
-  export PYENV_VERSION=system 
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VERSION=2.7.8 
 fi
 
 # rvm
 if [ -e $HOME/.rvm ]; then
   export PATH="$PATH:$HOME/.rvm/bin"
 fi
+
+eval "$(rbenv init -)"
