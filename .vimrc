@@ -28,6 +28,8 @@ NeoBundle 'scrooloose/nerdtree'
 
 NeoBundle 'mattn/emmet-vim'
 
+NeoBundle 'fatih/vim-go'
+
 "NeoBundle 'sudo.vim'
 
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -105,3 +107,8 @@ set expandtab
 
 " backup
 set nobackup
+
+" Golang
+if $GOROOT != ''
+    set rtp+=$GOROOT/misc/vim
+endif

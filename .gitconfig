@@ -24,3 +24,5 @@
 
 [diff]
   renames = true
+[ghq]
+  root = ~/.ghq

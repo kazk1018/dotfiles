@@ -53,6 +53,7 @@ export EDITOR=vim
 export GIT_EDITOR=vim
 export LANG=ja_JP.UTF-8
 export DOTFILES=$HOME/dotfiles
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 
 # Completion
 autoload -Uz compinit
@@ -124,13 +125,22 @@ fi
 # App & Library
 
 # node & nvm initialization
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
-npm_dir=${NVM_PATH}_modules
-export NODE_PATH=$npm_dir
+if [ -f $HOME/.nvm/nvm.sh ]; then
+  source ~/.nvm/nvm.sh
+  npm_dir=${NVM_PATH}_modules
+  export NODE_PATH=$npm_dir
+fi
+
+if [ -f $(brew --prefix nvm)/nvm.sh ]; then
+  source $(brew --prefix nvm)/nvm.sh
+  npm_dir=${NVM_PATH}_modules
+  export NODE_PATH=$npm_dir
+fi
+
 nvm use v0.10.33
 
 # JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 # /usr/local/bin
@@ -152,4 +162,38 @@ if [ -e $HOME/.rvm ]; then
   export PATH="$PATH:$HOME/.rvm/bin"
 fi
 
+# rbenv
 eval "$(rbenv init -)"
+
+# GOPATH
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# peco
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^f' peco-src
+
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+    eval $tac | \
+    peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
