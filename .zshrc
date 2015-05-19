@@ -140,7 +140,7 @@ fi
 nvm use v0.10.33
 
 # JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 # /usr/local/bin
