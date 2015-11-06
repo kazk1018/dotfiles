@@ -114,4 +114,4 @@ if $GOROOT != ''
 endif
 
 " Clipboard
-set clipboard=unnamed,autoselec
+set clipboard=unnamed,autoselect

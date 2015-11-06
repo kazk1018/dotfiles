@@ -25,6 +25,7 @@ brew install ag
 brew install motemen/ghq/ghq
 brew install peco/peco/peco
 brew install Caskroom/cask/xquartz
+brew install reattach-to-user-namespace
 
 # Install Applications
 brew tap caskroom/homebrew-versions
