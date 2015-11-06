@@ -140,7 +140,7 @@ fi
 nvm use v0.10.33
 
 # JAVA_HOME
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 # Gradle
@@ -157,7 +157,7 @@ if [ -e $HOME/.pyenv ]; then
   export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
   eval "$(pyenv virtualenv-init -)"
-  export PYENV_VERSION=2.7.8 
+  export PYENV_VERSION=2.7.9 
 fi
 
 # rvm
@@ -167,6 +167,7 @@ fi
 
 # rbenv
 eval "$(rbenv init -)"
+export PATH="$PATH:$HOME/.rbenv/shims"
 
 # GOPATH
 export GOROOT=/usr/local/opt/go/libexec

@@ -112,3 +112,6 @@ set nobackup
 if $GOROOT != ''
     set rtp+=$GOROOT/misc/vim
 endif
+
+" Clipboard
+set clipboard=unnamed,autoselec
