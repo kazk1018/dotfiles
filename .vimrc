@@ -34,6 +34,8 @@ NeoBundle 'fatih/vim-go'
 
 NeoBundle 'ujihisa/unite-colorscheme'
 
+NeoBundle 'derekwyatt/vim-scala'
+
 NeoBundleLazy "davidhalter/jedi-vim", {
     \ "autoload": {
     \   "filetypes": ["python", "python3", "djangohtml"],
