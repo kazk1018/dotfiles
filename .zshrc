@@ -235,7 +235,6 @@ fi
 
 # rbenv
 eval "$(rbenv init -)"
-export PATH="$PATH:$HOME/.rbenv/shims"
 
 # GOPATH
 export GOROOT=/usr/local/opt/go/libexec
