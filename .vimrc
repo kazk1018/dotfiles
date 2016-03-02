@@ -15,7 +15,18 @@ call neobundle#begin(expand('$HOME/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
@@ -29,6 +40,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'mattn/emmet-vim'
 
 NeoBundle 'fatih/vim-go'
+
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 "NeoBundle 'sudo.vim'
 
@@ -81,7 +94,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " jedi-vim
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType python setlocal completeopt-=preview
-
 let g:jedi#completions_enabled = 0
 
 let g:jedi#popup_select_first = 0
@@ -117,3 +129,21 @@ endif
 
 " Clipboard
 set clipboard=unnamed,autoselect
+
+let mapleader = "\<Space>"
+
+" set Leader
+nmap <Leader>u [unite]
+
+" Unite key mapping
+nnoremap [unite] <Nop>
+
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+
+nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
+
+nnoremap <silent> [unite]d :<C-u>Unite<Space>directory_mru<CR>
+
+nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
+
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>

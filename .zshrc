@@ -75,6 +75,7 @@ function tmux_automatically_attach_session()
 }
 tmux_automatically_attach_session
 
+
 # git
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '(%b)'
@@ -235,7 +236,6 @@ fi
 
 # rbenv
 eval "$(rbenv init -)"
-export PATH="$PATH:$HOME/.rbenv/shims"
 
 # GOPATH
 export GOROOT=/usr/local/opt/go/libexec
@@ -269,3 +269,9 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/usr/local/Cellar/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/usr/local/Cellar/google-cloud-sdk/completion.zsh.inc'
