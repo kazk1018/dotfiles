@@ -14,6 +14,7 @@
   sb = submodule
   l  = log --decorate --stat
   lg = log --graph --decorate --oneline
+  cp = cherry-pick
 
 [credential]
   helper = osxkeychain
