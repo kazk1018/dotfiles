@@ -95,6 +95,7 @@ alias sb="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias mou='open -a Mou'
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
+alias nb="jupyter notebook"
 alias gp="cd $GOPATH/src/github.com/kazk1018"
 
 ## commands
