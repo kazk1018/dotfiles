@@ -96,6 +96,7 @@ alias mou='open -a Mou'
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 alias nb="jupyter notebook"
+alias nbc="jupyter notebook --notebook-dir ."
 alias gp="cd $GOPATH/src/github.com/kazk1018"
 
 ## commands
@@ -109,6 +110,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias sudo='sudo -E '
+alias vim='/usr/local/bin/vim'
 
 alias v='vagrant'
 

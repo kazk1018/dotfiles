@@ -49,19 +49,19 @@ NeoBundle 'ujihisa/unite-colorscheme'
 
 NeoBundle 'derekwyatt/vim-scala'
 
-NeoBundleLazy "davidhalter/jedi-vim", {
-    \ "autoload": {
-    \   "filetypes": ["python", "python3", "djangohtml"],
+NeoBundleLazy 'davidhalter/jedi-vim', {
+    \ 'autoload': {
+    \   'filetypes': ['python', 'python3', 'djangohtml'],
     \ },
-    \ "build": {
-    \   "mac": "pip install jedi",
-    \   "unix": "pip install jedi",
+    \ 'build': {
+    \   'mac': 'pip install jedi',
+    \   'unix': 'pip install jedi',
     \ }}
 
-NeoBundleLazy "lambdalisue/vim-pyenv", {
-    \ "depends": ['davidhalter/jedi-vim'],
-    \ "autoload": {
-    \   "filetypes": ["python", "python3", "djangohtml"]
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+    \ 'depends': ['davidhalter/jedi-vim'],
+    \ 'autoload': {
+    \   'filetypes': ['python', 'python3', 'djangohtml']
     \ }}
 
 call neobundle#end()
