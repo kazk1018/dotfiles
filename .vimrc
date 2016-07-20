@@ -35,15 +35,11 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'basyura/unite-rails'
 NeoBundle 'AndrewRadev/switch.vim'
 
-NeoBundle 'scrooloose/nerdtree'
-
 NeoBundle 'mattn/emmet-vim'
 
 NeoBundle 'fatih/vim-go'
 
 NeoBundle 'christoomey/vim-tmux-navigator'
-
-"NeoBundle 'sudo.vim'
 
 NeoBundle 'ujihisa/unite-colorscheme'
 
@@ -87,10 +83,6 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" NERDTree "
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " jedi-vim
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType python setlocal completeopt-=preview
@@ -130,15 +122,21 @@ endif
 " Clipboard
 set clipboard=unnamed,autoselect
 
+" set Leader
 let mapleader = "\<Space>"
 
-" set Leader
+" save a file
+nnoremap <Leader>w :w<CR>
+
+" unite from Leader
 nmap <Leader>u [unite]
 
 " Unite key mapping
 nnoremap [unite] <Nop>
 
 nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+
+nnoremap <silent> [unite]n :<C-u>Unite<Space>file/new<CR>
 
 nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer file_mru<CR>
 
