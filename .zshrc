@@ -97,7 +97,6 @@ alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 alias nb="jupyter notebook"
 alias nbc="jupyter notebook --notebook-dir ."
-alias gp="cd $GOPATH/src/github.com/kazk1018"
 
 ## commands
 alias ls='ls -G'
@@ -246,6 +245,8 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+alias gp="cd $GOPATH/src/github.com/kazk1018"
+
 # peco
 function peco-src () {
   local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
@@ -279,3 +280,6 @@ source '/usr/local/Cellar/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 source '/usr/local/Cellar/google-cloud-sdk/completion.zsh.inc'
+
+# Neovim
+export XDG_CONFIG_HOME=$HOME/.config
