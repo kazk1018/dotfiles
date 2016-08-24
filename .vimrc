@@ -25,6 +25,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 \    },
 \ }
 
+NeoBundle 'Shougo/vimfiler'
+
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neocomplete'
@@ -65,6 +67,9 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
+
+"VimFiler
+let g:vimfiler_safe_mode_by_default = 0
 
 "NeoComplete
 
@@ -145,3 +150,5 @@ nnoremap <silent> [unite]d :<C-u>Unite<Space>directory_mru<CR>
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer<CR>
 
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+
+nnoremap <Leader>f :VimFiler -split -simple -winwidth=35 -no-quit<CR>
