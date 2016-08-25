@@ -196,20 +196,9 @@ fi
 
 # App & Library
 
-# node & nvm initialization
-if [ -f $HOME/.nvm/nvm.sh ]; then
-  source ~/.nvm/nvm.sh
-  npm_dir=${NVM_PATH}_modules
-  export NODE_PATH=$npm_dir
-fi
-
-if [ -f $(brew --prefix nvm)/nvm.sh ]; then
-  source $(brew --prefix nvm)/nvm.sh
-  npm_dir=${NVM_PATH}_modules
-  export NODE_PATH=$npm_dir
-fi
-
-nvm use v0.10.33
+# nvm
+export NVM_DIR=$HOME/.nvm
+. $(brew --prefix nvm)/nvm.sh
 
 # JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
