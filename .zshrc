@@ -1,4 +1,4 @@
- # .zshrc
+# .zshrc
 
 # Colors
 autoload -Uz colors
@@ -196,10 +196,6 @@ fi
 
 # App & Library
 
-# nvm
-export NVM_DIR=$HOME/.nvm
-. $(brew --prefix nvm)/nvm.sh
-
 # JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
@@ -210,20 +206,12 @@ export GRADLE_OPTS=-Xmx1024m
 # /usr/local/bin
 export PATH=/usr/local/bin:$PATH
 
-# Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 # pyenv
 if [ -e $HOME/.pyenv ]; then
   export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
   eval "$(pyenv virtualenv-init -)"
-  export PYENV_VERSION=2.7.9 
-fi
-
-# rvm
-if [ -e $HOME/.rvm ]; then
-  export PATH="$PATH:$HOME/.rvm/bin"
+  export PYENV_VERSION=2.7.12 
 fi
 
 # rbenv
@@ -269,6 +257,3 @@ source '/usr/local/Cellar/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 source '/usr/local/Cellar/google-cloud-sdk/completion.zsh.inc'
-
-# Neovim
-export XDG_CONFIG_HOME=$HOME/.config
