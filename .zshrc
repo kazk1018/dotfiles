@@ -218,7 +218,7 @@ if [ -e $HOME/.pyenv ]; then
   export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
   eval "$(pyenv virtualenv-init -)"
-  export PYENV_VERSION=2.7.9 
+  export PYENV_VERSION=3.5.2 
 fi
 
 # rvm
