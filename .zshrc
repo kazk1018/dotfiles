@@ -214,11 +214,19 @@ if [ -e $HOME/.pyenv ]; then
   export PYENV_VERSION=2.7.12 
 fi
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 # rbenv
 eval "$(rbenv init -)"
 
+# goenv
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
+
+# direnv
+eval "$(direnv hook zsh)"
+
 # GOPATH
-export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -235,6 +243,17 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^f' peco-src
+
+function peco-go () {
+  local selected_dir=$(ls -d ${GOPATH}/src/github.com/kazk1018/* | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-go
+bindkey '^g' peco-go
 
 function peco-select-history() {
     local tac
@@ -253,7 +272,7 @@ zle -N peco-select-history
 bindkey '^r' peco-select-history
 
 # The next line updates PATH for the Google Cloud SDK.
-source '/usr/local/Cellar/google-cloud-sdk/path.zsh.inc'
+source "${HOME}/lib/google-cloud-sdk/path.zsh.inc"
 
 # The next line enables shell command completion for gcloud.
-source '/usr/local/Cellar/google-cloud-sdk/completion.zsh.inc'
+source "${HOME}/lib/google-cloud-sdk/completion.zsh.inc"
