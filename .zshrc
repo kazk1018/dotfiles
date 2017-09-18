@@ -223,9 +223,6 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
 
-# direnv
-eval "$(direnv hook zsh)"
-
 # GOPATH
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
