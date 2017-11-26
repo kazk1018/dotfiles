@@ -220,8 +220,11 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(rbenv init -)"
 
 # goenv
-export PATH="$HOME/.goenv/bin:$PATH"
-eval "$(goenv init -)"
+if [ -e $HOME/.goenv ]; then
+  eval "$(goenv init -)"
+  export GOENV_VERSION=1.8.3
+  export GOROOT=`go env GOROOT`
+fi
 
 # GOPATH
 export GOPATH=$HOME/go
@@ -241,8 +244,19 @@ function peco-src () {
 zle -N peco-src
 bindkey '^f' peco-src
 
+function peco-pyenv () {
+  local selected_env=$(ls ${HOME}/.pyenv/versions | peco --query "$LBUFFER")
+  if [ -n "$selected_env" ]; then
+    BUFFER="pyenv activate ${selected_env}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-pyenv
+bindkey '^p' peco-pyenv
+
 function peco-go () {
-  local selected_dir=$(ls -d ${GOPATH}/src/github.com/kazk1018/* | peco --query "$LBUFFER")
+  local selected_dir=$(ls -d ${GOPATH}/src/github.com/*/* | peco --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
     BUFFER="cd ${selected_dir}"
     zle accept-line
