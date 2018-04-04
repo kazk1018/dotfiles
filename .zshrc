@@ -6,6 +6,11 @@ colors
 
 export LSCOLORS=Exfxcxdxbxegedabagacad
 
+# XDG Base Directory
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
 # vi mode
 bindkey -v
 function zle-line-init zle-keymap-select {
@@ -231,6 +236,16 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 alias gp="cd $GOPATH/src/github.com/kazk1018"
+
+# Rust
+export PATH=$PATH:$HOME/.cargo/bin
+
+# node (nvm)
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # peco
 function peco-src () {

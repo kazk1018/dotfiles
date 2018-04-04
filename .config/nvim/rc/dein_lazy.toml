@@ -1,0 +1,134 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+on_source = ['denite.nvim']
+
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+on_event = 'CompleteDone'
+hook_source = '''
+  " call echodoc#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/deol.nvim'
+on_cmd = 'Deol'
+on_source = 'denite.nvim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_if = 1
+on_event = 'TextYankPost'
+on_source = ['unite.vim', 'denite.nvim']
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+depends = 'neomru.vim'
+hook_source = 'source $XDG_CONFIG_HOME/nvim/rc/plugins/denite.rc.vim'
+hook_add = '''
+  nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-highlight
+        \ line<CR>
+  nnoremap <silent> ;y
+        \ :<C-u>Denite -buffer-name=register
+        \ register neoyank<CR>
+  xnoremap <silent> ;y
+        \ :<C-u>Denite -default-action=replace -buffer-name=register
+        \ register neoyank<CR>
+  nnoremap <silent> ;f :<C-u>Denite file_point file_old
+        \ -sorters=sorter_rank
+        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+  nnoremap <silent> ;rf :<C-u>Denite file_mru<CR>
+  nnoremap <silent> ;* :<C-u>DeniteCursorWord -buffer-name=search
+        \ -auto-highlight -mode=normal line<CR>
+  nnoremap <silent> ;g :<C-u>Denite -buffer-name=search
+        \ -no-empty -mode=normal grep<CR>
+  nnoremap <silent> ;cg :<C-u>DeniteCursor -buffer-name=search
+        \ -no-empty -mode=normal grep<CR>
+  nnoremap <silent> ;; :<C-u>Denite -default-action=ex command command_history<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+depends = 'unite.vim'
+on_map = {n = '<Plug>'}
+on_if = "isdirectory(bufname('%'))"
+hook_add = 'nnoremap <silent> <Leader>f :<C-u>VimFiler -invisible<CR>'
+hook_source = '''
+  call vimfiler#custom#profile('default', 'context', {
+        \ 'safe' : 0,
+        \ 'auto_expand' : 1,
+        \ 'parent' : 0,
+        \ })
+  let g:vimfiler_as_default_explorer = 1
+
+  " Like Textmate icons.
+  let g:vimfiler_tree_leaf_icon = ' '
+  let g:vimfiler_tree_opened_icon = '▾'
+  let g:vimfiler_tree_closed_icon = '▸'
+  let g:vimfiler_file_icon = ' '
+  let g:vimfiler_readonly_file_icon = '✗'
+  let g:vimfiler_marked_file_icon = '✓'
+
+  autocmd MyAutoCmd FileType vimfiler call s:vimfiler_my_settings()
+  function! s:vimfiler_my_settings() abort "{{{
+    nmap <buffer> <Tab> <Plug>(vimfiler_switch_to_other_window)
+  endfunction"}}}
+'''
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_source = '''
+  let g:rustfmt_autosave = 1
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = 'vim'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+on_ft = 'go'
+hook_source = '''
+  let g:deoplete#sources#go#gocode_binary = expand('$GOPATH/bin/gocode')
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_ft = 'rust'
+
+[[plugins]]
+repo = 'rhysd/vim-operator-surround'
+depends = 'vim-operator-user'
+on_map = {n = '<Plug>'}
+hook_add = '''
+  nmap <silent>sa <Plug>(operator-surround-append)a
+  nmap <silent>sd <Plug>(operator-surround-delete)a
+  nmap <silent>sr <Plug>(operator-surround-replace)a
+  nmap <silent>sc <Plug>(operator-surround-replace)a
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 'has("python3")'
+on_event = 'InsertEnter'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  source $XDG_CONFIG_HOME/nvim/rc/plugins/deoplete.rc.vim
+'''

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-DOT_FILES=( .zshrc .gitconfig .gitignore .vim .vimrc .gitmodules .tmux.conf ) 
+DOT_FILES=( .zshrc .gitconfig .gitignore .vim .vimrc .gitmodules .tmux.conf .config/nvim ) 
 REPO_PATH="" 
 
 if [ -e $HOME/dotfiles ]; 
