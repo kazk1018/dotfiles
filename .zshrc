@@ -6,6 +6,9 @@ colors
 
 export LSCOLORS=Exfxcxdxbxegedabagacad
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -102,42 +105,41 @@ alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 alias nb="jupyter notebook"
 alias nbc="jupyter notebook --notebook-dir ."
+alias nb='nodebrew'
+alias vim='/usr/local/bin/nvim'
+alias ipy='ipython'
+alias py='python2'
+alias py3='python3'
+alias act='source .venv/bin/activate'
+alias deact='deactivate'
 
 ## commands
 alias ls='ls -G'
-alias la='ls -a -G'
-alias ll='ls -l -G'
-alias lla='ls -la -G'
-alias lal='ls -la -G'
+alias ll='ls -lFhG'
+alias la='ls -lAFhG'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias sudo='sudo -E '
-alias vim='/usr/local/bin/vim'
-
+alias d='docker'
+alias c='code'
 alias v='vagrant'
 
 # Prompt
-local p_cdir="%F{green}[%~]$f%b"$'\n'
-local p_info="[%n@%m]%# "
-PROMPT="$p_cdir$p_info"
+local p_cdir="%B[%c]%b"
+PROMPT="%(?.%F{6}.%F{1})$p_cdir %#%f "
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-
 # General Settings
-export EDITOR=vim
-export GIT_EDITOR=vim
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 export LANG=ja_JP.UTF-8
-export DOTFILES=$HOME/dotfiles
+export DOTFILES=$HOME/.ghq/github.com/kazk1018/dotfiles
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 
-# Completion
-autoload -Uz compinit
-compinit -C
-
 ## 補完で小文字でも大文字にマッチさせる
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 ## 補間時にカーソル選択できるようにする
 zstyle ':completion:*:default' menu select=1
@@ -185,6 +187,10 @@ setopt mark_dirs
 
 # Plugins
 
+# fpath
+fpath=($HOME/.zfunc $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+
 ## zsh-completions
 if [ -e $DOTFILES/.zsh/zsh-completions ]; then
   fpath=($DOTFILES/.zsh/zsh-completions/src $fpath)
@@ -195,39 +201,41 @@ if [ -e $DOTFILES/.zsh/zsh-syntax-highlighting ]; then
   source $DOTFILES/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# Completion
+autoload -Uz compinit
+compinit
+
 # SSH 
 # source ~/.zsh_ssh
 
-
 # App & Library
+
+# /usr/local/bin
+export PATH=/usr/local/bin:$PATH
 
 # JAVA_HOME
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
-# Gradle
-export GRADLE_OPTS=-Xmx1024m
-
-# /usr/local/bin
-export PATH=/usr/local/bin:$PATH
-
 # pyenv
 if [ -e $HOME/.pyenv ]; then
   export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
-  eval "$(pyenv virtualenv-init -)"
-  export PYENV_VERSION=2.7.12 
+  export PYENV_VERSION=system 
 fi
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # rbenv
 eval "$(rbenv init -)"
+export RBENV_VERSION=2.6.3
 
 # goenv
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
 if [ -e $HOME/.goenv ]; then
   eval "$(goenv init -)"
-  export GOENV_VERSION=1.8.3
+  export GOENV_VERSION=1.13.0
   export GOROOT=`go env GOROOT`
 fi
 
@@ -240,9 +248,9 @@ alias gp="cd $GOPATH/src/github.com/kazk1018"
 # Rust
 export PATH=$PATH:$HOME/.cargo/bin
 
-# node (nvm)
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+# nodebrew
+export NODEBREW_ROOT=/usr/local/var/nodebrew
+export PATH=$NODEBREW_ROOT/current/bin:$PATH
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -262,7 +270,7 @@ bindkey '^f' peco-src
 function peco-pyenv () {
   local selected_env=$(ls ${HOME}/.pyenv/versions | peco --query "$LBUFFER")
   if [ -n "$selected_env" ]; then
-    BUFFER="pyenv activate ${selected_env}"
+    BUFFER="pyenv shell ${selected_env}"
     zle accept-line
   fi
   zle clear-screen
@@ -302,3 +310,6 @@ source "${HOME}/lib/google-cloud-sdk/path.zsh.inc"
 
 # The next line enables shell command completion for gcloud.
 source "${HOME}/lib/google-cloud-sdk/completion.zsh.inc"
+
+# pipenv
+export PIPENV_VENV_IN_PROJECT=1
