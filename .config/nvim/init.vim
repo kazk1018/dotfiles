@@ -5,7 +5,7 @@ if &compatible
 endif
 
 " reset filetype
-filetype off
+filetype on
 
 augroup MyAutoCmd
   autocmd!
