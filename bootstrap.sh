@@ -9,10 +9,6 @@ if [ ! -x "`which brew`" ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
   brew update
-  brew upgrade --all --cleanup
+  brew upgrade
 fi
-
-# Git
-echo "Install git..."
-brew install git
 

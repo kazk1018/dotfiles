@@ -5,6 +5,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 
 brew "ghq"
+brew "git"
 brew "jq"
 brew "mas"
 brew "nkf"
