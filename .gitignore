@@ -6,3 +6,7 @@
 
 # ssh
 .zsh_ssh
+
+# zsh
+.zsh_history
+.zcompdump

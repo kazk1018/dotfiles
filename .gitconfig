@@ -26,4 +26,4 @@
 [diff]
   renames = true
 [ghq]
-  root = ~/.ghq
+  root = ~/src
