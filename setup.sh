@@ -15,6 +15,10 @@ if [ ! -e "$HOME/.zshenv" ]; then
     ln -s "$BASE_DIR/.zshenv" $HOME/.zshenv
 fi
 
+if [ ! -e "$HOME/.gitconfig" ]; then
+    ln -s "$BASE_DIR/.gitconfig" $HOME/.gitconfig
+fi
+
 if [ ! -e "$XDG_CONFIG_HOME/zsh" ]; then
     ln -s "$BASE_DIR/config/zsh" "$XDG_CONFIG_HOME/zsh"
 fi
