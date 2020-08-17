@@ -30,7 +30,6 @@ compinit
 ## python
 ### pyenv
 if [ -e "$HOME/.pyenv" ]; then
-  export PATH="$PATH:$HOME/.pyenv/bin"
   eval "$(pyenv init - zsh)"
   export PYENV_VERSION=system
 fi
