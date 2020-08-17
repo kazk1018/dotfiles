@@ -34,7 +34,7 @@ on_cmd = 'Denite'
 depends = 'neomru.vim'
 hook_source = 'source $XDG_CONFIG_HOME/nvim/rc/plugins/denite.rc.vim'
 hook_add = '''
-  nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-highlight
+  nnoremap <silent> ;u :<C-u>Denite -buffer-name=search%`bufnr('%')`
         \ line<CR>
   nnoremap <silent> ;y
         \ :<C-u>Denite -buffer-name=register
@@ -42,16 +42,16 @@ hook_add = '''
   xnoremap <silent> ;y
         \ :<C-u>Denite -default-action=replace -buffer-name=register
         \ register neoyank<CR>
-  nnoremap <silent> ;f :<C-u>Denite file_point file_old
+  nnoremap <silent> ;f :<C-u>Denite file/point file/old
         \ -sorters=sorter_rank
-        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-  nnoremap <silent> ;rf :<C-u>Denite file_mru<CR>
+        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
+  nnoremap <silent> ;rf :<C-u>Denite file/mru<CR>
   nnoremap <silent> ;* :<C-u>DeniteCursorWord -buffer-name=search
-        \ -auto-highlight -mode=normal line<CR>
+        \ -auto-action line<CR>
   nnoremap <silent> ;g :<C-u>Denite -buffer-name=search
-        \ -no-empty -mode=normal grep<CR>
+        \ -no-empty grep<CR>
   nnoremap <silent> ;cg :<C-u>DeniteCursor -buffer-name=search
-        \ -no-empty -mode=normal grep<CR>
+        \ -no-empty grep<CR>
   nnoremap <silent> ;; :<C-u>Denite -default-action=ex command command_history<CR>
 '''
 
