@@ -26,6 +26,7 @@ cask "google-cloud-sdk"
 cask "google-japanese-ime"
 cask "iterm2"
 cask "karabiner-elements"
+cask "keyboardcleantool"
 cask "visual-studio-code"
 cask "zoomus"
 
