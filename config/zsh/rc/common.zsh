@@ -34,6 +34,9 @@ if [ -e "$HOME/.pyenv" ]; then
   export PYENV_VERSION=system
 fi
 
+# homebrew
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 ### pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
