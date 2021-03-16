@@ -31,7 +31,6 @@ compinit
 ### pyenv
 if [ -e "$HOME/.pyenv" ]; then
   eval "$(pyenv init - zsh)"
-  export PYENV_VERSION=system
 fi
 
 # homebrew
