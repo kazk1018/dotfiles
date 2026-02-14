@@ -18,7 +18,13 @@ managed by [chezmoi](https://www.chezmoi.io/)
 └── README.md
 ```
 
-## Installation
+## Usage
+
+### Prerequisites
+
+- Download fonts from [UDEV Gothic 35NFLG](https://github.com/yuru7/udev-gothic)
+
+### Installation
 
 ```bash
 # install chezmoi in `$PWD/bin`
