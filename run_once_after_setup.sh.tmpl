@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+set -e
+
+{{ if eq .chezmoi.os "darwin" }}
+
+# Homebrew
+brew bundle --global
+
+# mise
+mise install
+
+{{ end }}

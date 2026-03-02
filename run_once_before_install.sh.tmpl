@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+{{ if eq .chezmoi.os "darwin" }}
+
+# Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# make directories
+mkdir -p ~/dev/src
+
+{{ end }}

@@ -1,0 +1,24 @@
+theme = "tokyonight"
+
+[editor]
+true-color = true
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline" 
+
+[editor.file-picker]
+max-depth = 2
+hidden = false
+
+[editor.indent-guides]
+render = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
+[keys.insert]
+C-c = "normal_mode"
+C-space = "completion"

@@ -1,0 +1,33 @@
+[user]
+  name  = "kazk1018"
+  email = "{{ .email }}"
+
+[init]
+	defaultBranch = main
+
+[alias]
+  st = status --short --branch
+  ci = commit
+  df = diff
+  co = checkout
+  b  = branch
+  sb = submodule
+  l  = log --decorate --stat
+  lg = log --graph --decorate --oneline
+  cp = cherry-pick
+
+[color]
+  ui = true
+  diff = true
+
+[diff]
+  renames = true
+
+[merge]
+    ff = false
+
+[pull]
+    ff = only
+
+[ghq]
+  root = ~/dev/src

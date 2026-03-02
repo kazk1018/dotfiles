@@ -1,0 +1,13 @@
+shell-integration = zsh
+
+theme = TokyoNight
+
+font-family = "UDEV Gothic 35NFLG"
+font-size = 16
+font-feature = -dlig
+
+copy-on-select = clipboard
+macos-option-as-alt = true
+
+background-opacity = 0.9
+background-blur = true

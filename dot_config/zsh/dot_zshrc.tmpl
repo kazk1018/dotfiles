@@ -1,0 +1,134 @@
+# colors
+autoload -Uz colors && colors
+
+# completion
+autoload -Uz compinit && compinit -d $XDG_STATE_HOME/zsh
+
+# vim mode
+bindkey -v
+
+# locale
+export LANG=en_US.UTF-8
+
+# editor
+export EDITOR="{{ .editor -}}"
+export VISUAL=$EDITOR
+
+# brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export HOMEBREW_FORBIDDEN_FORMULAE="python python3 uv claude node npm"
+
+# mise
+eval "$(/opt/homebrew/bin/mise activate zsh)"
+eval "$(/opt/homebrew/bin/mise completion zsh)"
+
+# starship
+export STARSHIP_CACHE="$XDG_CACHE_HOME/starship"
+
+eval "$(starship init zsh)"
+
+# sheldon
+eval "$(sheldon --quiet source)"
+
+# uv
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
+# https://zenn.dev/tadayosi/articles/522efbda48fbf4
+_uv_run_mod() {
+    if [[ "$words[2]" == "run" && "$words[CURRENT]" != -* ]]; then
+        _arguments '*:filename:_files'
+    else
+        _uv "$@"
+    fi
+}
+compdef _uv_run_mod uv
+
+# gcloud
+source "$(mise where gcloud)/completion.zsh.inc"
+source "$(mise where gcloud)/path.zsh.inc"
+
+# gh
+eval "$(gh completion -s zsh)"
+
+# history
+export HISTFILE="$ZDOTDIR/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=100000
+setopt extended_history
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt append_history
+setopt inc_append_history
+setopt hist_no_store
+zshaddhistory() {
+    local line="${1%%$'\n'}"
+    [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ls|rm|rmdir|builtin)($| )" ]]
+}
+
+# alias
+
+## git
+alias g='git'
+alias gst='git status --short --branch' 
+
+## development
+alias d='docker'
+alias c='code'
+
+## linux commands
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias sudo='sudo -E '
+
+# ls / eza
+if [[ $(command -v eza) ]]; then
+  alias ls='eza -l'
+  alias la='eza -la --git -I ".git|__pycache__|.venv"'
+  alias lt='eza -la -T -L 2 --git -I ".git|__pycache__|.venv"'
+else
+  alias ll='ls -l'
+  alias la='ls -la'
+fi
+
+# cat / bat
+if [[ $(command -v bat) ]]; then
+  alias cat='bat'
+fi
+
+# fzf
+source <(fzf --zsh)
+
+export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,.venv,__pycache__ --preview 'bat -n --color=always {}'"
+export FZF_CTRL_R_OPTS="--color header:italic"
+export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,.venv,__pycache__,target"
+
+# yazi
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+# fzf ghq select
+fzf::ghq_select() {
+    local ghq_root="$(ghq root)"
+    local selected="$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $ghq_root/{}/README.*" | cut -d' ' -f2-)"
+    if [ -z "$selected" ]; then
+        return
+    fi
+
+    local repo_dir="$(ghq list --exact --full-path "$selected")"
+    BUFFER="cd ${(q)repo_dir}"
+    zle accept-line
+    zle -R -c # refresh screen
+}
+zle -N fzf::ghq_select
+bindkey "^F" fzf::ghq_select

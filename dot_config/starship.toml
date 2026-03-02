@@ -1,0 +1,9 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+command_timeout = 1000
+
+[gcloud]
+disabled = true
+
+[git_status]
+disabled = true
