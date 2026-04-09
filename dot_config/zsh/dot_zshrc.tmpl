@@ -45,10 +45,6 @@ _uv_run_mod() {
 }
 compdef _uv_run_mod uv
 
-# gcloud
-source "$(mise where gcloud)/completion.zsh.inc"
-source "$(mise where gcloud)/path.zsh.inc"
-
 # gh
 eval "$(gh completion -s zsh)"
 
@@ -72,7 +68,7 @@ zshaddhistory() {
 
 ## git
 alias g='git'
-alias gst='git status --short --branch' 
+alias gst='git status --short --branch'
 
 ## development
 alias d='docker'

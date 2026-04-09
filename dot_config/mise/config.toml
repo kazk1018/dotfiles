@@ -1,7 +1,6 @@
 [tools]
 bat = "latest"
 fzf = "latest"
-gcloud = "latest"
 gh = "latest"
 ghq = "latest"
 jq = "latest"
@@ -14,9 +13,6 @@ uv = "latest"
 helix = "latest"
 eza = "latest"
 yazi = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
+codex = "latest"
+claude = "latest"
 "npm:bash-language-server" = "latest"
-
-[tasks.gcloud-login]
-description = "Authenticate google cloud"
-run = "gcloud auth application-default login"
